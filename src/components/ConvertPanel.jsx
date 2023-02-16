@@ -1,61 +1,99 @@
 import React, { useEffect } from "react";
-import arrows from "../img/arrows.png";
 import { useState } from "react";
+import { AiOutlineHeart } from "react-icons/ai";
+import { TbArrowsLeftRight } from "react-icons/tb";
 
 export default function ConvertPanel() {
-  const [conversion, setConversion] = useState("kilómetros a millas");
+  const [conversion, setConversion] = useState("km → miles");
+  const [uniti, setUniti] = useState("miles");
   const [inputValor, setInputValor] = useState(0);
   const [valor, setValor] = useState(inputValor);
-  console.log(conversion);
 
   useEffect(() => {
     switch (conversion) {
-      case "kilómetros a millas":
+      case "km → miles":
         setValor(0.62137 * inputValor);
+        setUniti("miles");
         break;
-      case "millas a kilómetros":
+      case "miles → km":
         setValor(1.60934 * inputValor);
+        setUniti("km");
         break;
-      case "pies a metros":
+      case "feeds → meters":
         setValor(0.3048 * inputValor);
+        setUniti("meters");
         break;
-      case "metros a pies":
+      case "meters → feeds":
         setValor(3.28084 * inputValor);
+        setUniti("feeds");
         break;
-      case "centímetros a pulgadas":
+      case "cm → inches":
         setValor(0.393701 * inputValor);
+        setUniti("inches");
         break;
-      case "pulgadas a centímetros":
+      case "inches → cm":
         setValor(2.54 * inputValor);
+        setUniti("cm");
         break;
       default:
         break;
     }
   });
 
+  const arrowFunc = () => {
+    if (conversion === "km → miles") {
+      document.getElementById("selectId").value = "miles → km";
+    }
+    if (conversion === "miles → km") {
+      document.getElementById("selectId").value = "km → miles";
+    }
+    if (conversion === "feeds → meters") {
+      document.getElementById("selectId").value = "meters → feeds";
+    }
+    if (conversion === "meters → feeds") {
+      document.getElementById("selectId").value = "feeds → meters";
+    }
+    if (conversion === "cm → inches") {
+      document.getElementById("selectId").value = "inches → cm";
+    }
+    if (conversion === "inches → cm") {
+      document.getElementById("selectId").value = "cm → inches";
+    }
+    document.getElementById("inputId").value = valor.toFixed(2);
+    setConversion(document.getElementById("selectId").value);
+
+    console.log(conversion);
+  };
+
+  const saveFunction = () => {};
+
   return (
     <>
       <div className="convertPanel">
         <h1>convert</h1>
-
-        <select onClick={(e) => setConversion(e.target.value)}>
-          <option>kilómetros a millas</option>
-          <option>millas a kilómetros</option>
-          <option>pies a metros</option>
-          <option>metros a pies</option>
-          <option>centímetros a pulgadas</option>
-          <option>pulgadas a centímetros</option>
+        <select id="selectId" onClick={(e) => setConversion(e.target.value)}>
+          <option>km → miles</option>
+          <option>miles → km</option>
+          <option>feeds → meters</option>
+          <option>meters → feeds</option>
+          <option>cm → inches</option>
+          <option>inches → cm</option>
         </select>
-        <button>
-          <img id="imgArrows" src={arrows} height="24px" alt="doubleArrow" />
-        </button>
+
+        <TbArrowsLeftRight onClick={() => arrowFunc()} />
         <input
+          id="inputId"
           type="number"
           placeholder="Introduzca un numero"
           onChange={(e) => setInputValor(e.target.value)}
         />
+        <h1 className="corazone">
+          <AiOutlineHeart onClick={() => saveFunction()} />
+          {valor.toFixed(2)}
+          {uniti}
+        </h1>
       </div>
-      <h1>{valor}</h1>
+      <h1>saved</h1>
     </>
   );
 }
