@@ -59,7 +59,7 @@ export default function ConvertPanel() {
       default:
         break;
     }
-    localStorage.setItem("valor", JSON.stringify(valor));
+    localStorage.setItem("valor", JSON.stringify(parseFloat(valor).toFixed(2)));
     localStorage.setItem("uniti", JSON.stringify(uniti));
     localStorage.setItem("uniti2", JSON.stringify(uniti2));
   });
@@ -98,6 +98,16 @@ export default function ConvertPanel() {
     localStorage.setItem("list", JSON.stringify(list));
   }, [list]);
 
+  const deleteT = (t) => {
+    let newList = [];
+    list.forEach((elemento) => {
+      if (elemento.id !== t) {
+        newList.push(elemento);
+      }
+      setList(newList);
+      localStorage.setItem("list", JSON.stringify(newList));
+    });
+  };
   return (
     <>
       <div className="convertPanel">
@@ -133,12 +143,11 @@ export default function ConvertPanel() {
       <h1>saved</h1>
       <ul>
         {list.map((item, i) => (
-          <li key={i}>
+          <li className="saveList" key={i}>
             {" "}
-            {item.inputValor}
-            {item.uniti2}→{item.valor}
-            {item.uniti}{" "}
-            <button onClick={(e) => console.log(e.target.value)}>X</button>
+            {parseFloat(item.inputValor).toFixed(2)}
+            {item.uniti2}→{parseFloat(item.valor).toFixed(2)}
+            {item.uniti} <button onClick={() => deleteT(item.id)}>X</button>
           </li>
         ))}
       </ul>
