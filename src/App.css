@@ -70,6 +70,9 @@
   margin-block: 10px;
   margin-right: 10px;
 }
+.panelSelect:hover {
+  cursor: pointer;
+}
 .panelInput {
   background-color: #2e0039;
   border: inherit;
@@ -86,6 +89,9 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+.corazoncito:hover {
+  cursor: pointer;
 }
 .save {
   margin: 20px;

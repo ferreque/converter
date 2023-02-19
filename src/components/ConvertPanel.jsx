@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { AiOutlineHeart } from "react-icons/ai";
 import { TbArrowsLeftRight } from "react-icons/tb";
+import SaveList from "./SaveList";
 import nextId from "react-id-generator";
 
 export default function ConvertPanel() {
@@ -98,16 +99,6 @@ export default function ConvertPanel() {
     localStorage.setItem("list", JSON.stringify(list));
   }, [list]);
 
-  const deleteT = (t) => {
-    let newList = [];
-    list.forEach((elemento) => {
-      if (elemento.id !== t) {
-        newList.push(elemento);
-      }
-      setList(newList);
-      localStorage.setItem("list", JSON.stringify(newList));
-    });
-  };
   return (
     <>
       <div className="convertPanel">
@@ -127,7 +118,10 @@ export default function ConvertPanel() {
             <option>inches → cm</option>
           </select>
 
-          <TbArrowsLeftRight onClick={() => arrowFunc()} />
+          <TbArrowsLeftRight
+            className="corazoncito"
+            onClick={() => arrowFunc()}
+          />
 
           <input
             className="panelInput"
@@ -139,27 +133,16 @@ export default function ConvertPanel() {
           />
           {uniti2}
           <h2 className="corazone">
-            <AiOutlineHeart onClick={() => saveFunction()} />
+            <AiOutlineHeart
+              className="corazoncito"
+              onClick={() => saveFunction()}
+            />
             {parseFloat(valor).toFixed(2)}
             {uniti}
           </h2>
         </div>
       </div>
-      <h3 className="save">saved</h3>
-      {list !== [] ? (
-        <ul className="contenedor">
-          {list.map((item, i) => (
-            <li className="saveList" key={i}>
-              {" "}
-              {parseFloat(item.inputValor).toFixed(2)}
-              {item.uniti2}→{parseFloat(item.valor).toFixed(2)}
-              {item.uniti} <p onClick={() => deleteT(item.id)}>x</p>
-            </li>
-          ))}
-        </ul>
-      ) : (
-        ""
-      )}
+      <SaveList list={list} setList={setList} />
     </>
   );
 }
