@@ -112,45 +112,54 @@ export default function ConvertPanel() {
     <>
       <div className="convertPanel">
         <h1>convert</h1>
-        <select
-          defaultValue={conversion}
-          id="selectId"
-          onClick={(e) => setConversion(e.target.value)}
-        >
-          <option>km → miles</option>
-          <option>miles → km</option>
-          <option>feeds → meters</option>
-          <option>meters → feeds</option>
-          <option>cm → inches</option>
-          <option>inches → cm</option>
-        </select>
+        <div>
+          <select
+            className="panelSelect"
+            defaultValue={conversion}
+            id="selectId"
+            onClick={(e) => setConversion(e.target.value)}
+          >
+            <option>km → miles</option>
+            <option>miles → km</option>
+            <option>feeds → meters</option>
+            <option>meters → feeds</option>
+            <option>cm → inches</option>
+            <option>inches → cm</option>
+          </select>
 
-        <TbArrowsLeftRight onClick={() => arrowFunc()} />
-        <input
-          onChange={(e) => setInputValor(e.target.value)}
-          defaultValue={inputValor !== 0 ? inputValor : ""}
-          id="inputId"
-          type="number"
-          placeholder="Introduzca un numero"
-        />
-        {uniti2}
-        <h1 className="corazone">
-          <AiOutlineHeart onClick={() => saveFunction()} />
-          {parseFloat(valor).toFixed(2)}
-          {uniti}
-        </h1>
+          <TbArrowsLeftRight onClick={() => arrowFunc()} />
+
+          <input
+            className="panelInput"
+            onChange={(e) => setInputValor(e.target.value)}
+            defaultValue={inputValor !== 0 ? inputValor : ""}
+            id="inputId"
+            type="number"
+            placeholder="Introduzca un numero"
+          />
+          {uniti2}
+          <h2 className="corazone">
+            <AiOutlineHeart onClick={() => saveFunction()} />
+            {parseFloat(valor).toFixed(2)}
+            {uniti}
+          </h2>
+        </div>
       </div>
-      <h1>saved</h1>
-      <ul>
-        {list.map((item, i) => (
-          <li className="saveList" key={i}>
-            {" "}
-            {parseFloat(item.inputValor).toFixed(2)}
-            {item.uniti2}→{parseFloat(item.valor).toFixed(2)}
-            {item.uniti} <button onClick={() => deleteT(item.id)}>X</button>
-          </li>
-        ))}
-      </ul>
+      <h3 className="save">saved</h3>
+      {list !== [] ? (
+        <ul className="contenedor">
+          {list.map((item, i) => (
+            <li className="saveList" key={i}>
+              {" "}
+              {parseFloat(item.inputValor).toFixed(2)}
+              {item.uniti2}→{parseFloat(item.valor).toFixed(2)}
+              {item.uniti} <p onClick={() => deleteT(item.id)}>x</p>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        ""
+      )}
     </>
   );
 }

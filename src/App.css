@@ -2,48 +2,38 @@
   margin: 0;
   padding: 0;
   list-style: none;
-  text-decoration: none;
-  border: none;
-  outline: none;
-}
-
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
 }
 
 .App-navbar {
   background-color: white;
-  height: 10vh;
+  height: 7vh;
   display: flex;
   align-items: center;
-  border-bottom: 2px solid #2e0039;
+
   font-size: calc(10px + 2vmin);
   color: #2e0039;
   font-family: "Poppins";
 }
+.hr {
+  border-top: 5px solid gainsboro;
+}
+
+.arrowLR {
+  margin: 10px;
+}
 
 .App-footer {
   background-color: #2e0039;
-  height: 10vh;
+  height: 5vh;
   width: 100vw;
   display: flex;
   flex-direction: row;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  font-size: 20px;
   color: white;
   font-family: "Poppins";
   position: absolute;
+  align-items: center;
   bottom: 0;
 }
 .App-footer p {
@@ -59,15 +49,119 @@
   padding: 10px;
   padding-inline: 25px;
 }
+.panelSelect {
+  background-color: green;
+  border: inherit;
+  border-bottom: 2px solid white;
+  font-weight: bold;
+  color: white;
+  width: 20vw;
+  margin-block: 10px;
+  margin-right: 10px;
+}
+
+.panelSelect {
+  background-color: #2e0039;
+  border: inherit;
+  border-bottom: 2px solid white;
+  font-weight: bold;
+  color: white;
+  width: 55vw;
+  margin-block: 10px;
+  margin-right: 10px;
+}
+.panelInput {
+  background-color: #2e0039;
+  border: inherit;
+  border-bottom: 2px solid white;
+  width: 55vw;
+  font-weight: bold;
+  color: white;
+  margin-block: 10px;
+  margin-right: 10px;
+  text-align: right;
+}
 .corazone {
+  width: 65vw;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
+.save {
+  margin: 20px;
+}
 .saveList {
-  margin: 10px;
+  margin: 20px;
   padding: 10px;
   background-color: gainsboro;
   border-radius: 10px;
-  justify-content: space-around;
+  display: flex;
+  justify-content: space-between;
+}
+@media (min-width: 1920px) {
+  .App-navbar {
+    background-color: white;
+    height: 7vh;
+    display: flex;
+    align-items: center;
+    font-size: calc(10px + 2vmin);
+    color: #2e0039;
+    font-family: "Poppins";
+    margin-inline: 25vw;
+  }
+  .convertPanel {
+    background-color: #2e0039;
+    color: white;
+    font-family: "Poppins";
+    margin-inline: 25vw;
+    border-radius: 20px;
+    padding: 10px;
+    padding-inline: 25px;
+  }
+
+  .panelSelect {
+    background-color: #2e0039;
+    border: inherit;
+    border-bottom: 2px solid white;
+    font-weight: bold;
+    color: white;
+    width: 15vw;
+    margin-block: 10px;
+    margin-right: 10px;
+  }
+  .panelInput {
+    background-color: #2e0039;
+    border: inherit;
+    border-bottom: 2px solid white;
+    width: 15vw;
+    font-weight: bold;
+    color: white;
+    margin-block: 10px;
+    margin-right: 10px;
+    text-align: right;
+  }
+  .corazone {
+    width: 35vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .save {
+    margin: 20px;
+    margin-inline: 25vw;
+  }
+  .contenedor {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-inline: 24vw;
+  }
+  .saveList {
+    width: 22vw;
+    padding: 10px;
+    background-color: gainsboro;
+    border-radius: 10px;
+    align-items: center;
+  }
 }
