@@ -1,15 +1,15 @@
 import React from "react";
+import { useEffect, useState } from "react";
 
-export default function SaveList({ list, setList }) {
-  const deleteT = (t) => {
-    let newList = [];
-    list.forEach((elemento) => {
-      if (elemento.id !== t) {
-        newList.push(elemento);
-      }
-      setList(newList);
-      localStorage.setItem("list", JSON.stringify(newList));
-    });
+export default function SaveList({ list, setFlag }) {
+  const deleteT = (id) => {
+    fetch("https://back-converter.vercel.app/data/delete", {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ id: id }),
+    })
+      .then((res) => res.json())
+      .finally(() => setFlag(false));
   };
 
   return (
@@ -20,9 +20,8 @@ export default function SaveList({ list, setList }) {
           {list.map((item, i) => (
             <li className="saveList" key={i}>
               {" "}
-              {parseFloat(item.inputValor).toFixed(2)}
-              {item.uniti2}→{parseFloat(item.valor).toFixed(2)}
-              {item.uniti}{" "}
+              {parseFloat(item.inputValor).toFixed(2)} {item.uniti2} →{" "}
+              {parseFloat(item.valor).toFixed(2)} {item.uniti}{" "}
               <p className="corazoncito" onClick={() => deleteT(item.id)}>
                 x
               </p>

@@ -17,10 +17,17 @@ export default function ConvertPanel() {
   const [inputValor, setInputValor] = useState(
     JSON.parse(localStorage.getItem("inputValor")) || 0
   );
-  const listLocal = JSON.parse(localStorage.getItem("list")) || [];
-  const [list, setList] = useState(listLocal || []);
-
+  const [list, setList] = useState([]);
   const [valor, setValor] = useState(inputValor);
+  const [flag, setFlag] = useState(true);
+
+  useEffect(() => {
+    fetch("https://back-converter.vercel.app/data/all")
+      .then((res) => res.json())
+      .then((json) => setList(json));
+    setFlag(true);
+  }, [flag]);
+
   localStorage.setItem("conversion", JSON.stringify(conversion));
   localStorage.setItem("inputValor", JSON.stringify(inputValor));
   let htmlId = nextId();
@@ -93,11 +100,13 @@ export default function ConvertPanel() {
   };
 
   const saveFunction = () => {
-    setList([...list, { id: htmlId, inputValor, uniti2, valor, uniti }]);
+    setList([{ id: htmlId, inputValor, uniti2, valor, uniti }, ...list]);
+    fetch("https://back-converter.vercel.app/data/new", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ id: htmlId, inputValor, uniti2, valor, uniti }),
+    }).then((res) => res.json());
   };
-  useEffect(() => {
-    localStorage.setItem("list", JSON.stringify(list));
-  }, [list]);
 
   return (
     <>
@@ -137,12 +146,11 @@ export default function ConvertPanel() {
               className="corazoncito"
               onClick={() => saveFunction()}
             />
-            {parseFloat(valor).toFixed(2)}
-            {uniti}
+            {parseFloat(valor).toFixed(2)} {uniti}
           </h2>
         </div>
       </div>
-      <SaveList list={list} setList={setList} />
+      <SaveList list={list} setList={setList} flag={flag} setFlag={setFlag} />
     </>
   );
 }
